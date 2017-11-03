@@ -105,6 +105,7 @@ public class VarastoTest {
         assertEquals(0, varasto2.getSaldo(), vertailuTarkkuus);     
     }
     
+    // muokkaus
     @Test
     public void testToStringToimii() {
         varasto.lisaaVarastoon(4);
