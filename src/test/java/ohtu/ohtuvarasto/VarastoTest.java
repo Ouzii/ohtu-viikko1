@@ -36,6 +36,8 @@ public class VarastoTest {
 
         // saldon pitäisi olla sama kun lisätty määrä
         assertEquals(8, varasto.getSaldo(), vertailuTarkkuus);
+        varasto.lisaaVarastoon(10);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
     }
 
     @Test
@@ -64,5 +66,51 @@ public class VarastoTest {
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
+    
+    @Test
+    public void testNegatiivinenLisays() {
+      varasto.lisaaVarastoon(-3);
+      assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testKonstruktoriVirhe() {
+        Varasto varasto2 = new Varasto(-2);
+        assertEquals(0.0, varasto2.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testToinenKonstruktori() {
+        Varasto varasto2 = new Varasto(10, 5);
+        assertEquals(10, varasto2.getTilavuus(), vertailuTarkkuus);
+        assertEquals(5, varasto2.getSaldo(), vertailuTarkkuus);
+        
+        Varasto varasto3 = new Varasto(-10, -4);
+        assertEquals(0, varasto3.getTilavuus(), vertailuTarkkuus);
+        assertEquals(0, varasto3.getSaldo(), vertailuTarkkuus);
+        
+        Varasto varasto4 = new Varasto(5, 10);
+        assertEquals(5, varasto4.getTilavuus(), vertailuTarkkuus);
+        assertEquals(5, varasto4.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void testOttaminenToimiiOikein() {
+        Varasto varasto2 = new Varasto(10, 8);
+        varasto2.otaVarastosta(-1);
+        assertEquals(8, varasto2.getSaldo(), vertailuTarkkuus);
+        
+        double otettu = varasto2.otaVarastosta(10);
+        assertEquals(8, otettu, vertailuTarkkuus);
+        assertEquals(0, varasto2.getSaldo(), vertailuTarkkuus);     
+    }
+    
+    @Test
+    public void testToStringToimii() {
+        varasto.lisaaVarastoon(4);
+        assertEquals("saldo = 4.0, vielä tilaa 6.0", varasto.toString());
+    }
+    
+    
 
 }
