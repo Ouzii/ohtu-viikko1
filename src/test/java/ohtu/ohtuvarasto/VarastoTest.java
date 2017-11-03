@@ -108,9 +108,8 @@ public class VarastoTest {
     // muokkaus
     @Test
     public void testToStringToimii() {
-        varasto.lisaaVarastoon(3);
+        varasto.lisaaVarastoon(4);
         assertEquals("saldo = 4.0, vielä tilaa 6.0", varasto.toString());
-        
     }
     
     
